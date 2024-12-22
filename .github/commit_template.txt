@@ -1,0 +1,9 @@
+# Title (50 chars or less)
+<type>: <short summary of the commit>
+
+# Body (optional, 72 chars or less per line)
+# - Explain what changes were made and why.
+# - Include references to related issues or pull requests.
+
+# Footer (optional)
+# Include "Closes #<issue-number>" if applicable.

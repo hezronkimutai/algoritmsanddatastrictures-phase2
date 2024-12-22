@@ -1,0 +1,27 @@
+name: Automatically create / update pull request
+
+# Run this workflow only on new feature branches, not when they're merged to main
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+jobs:
+  create_pr_repo_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Get the last commit message
+      - name: Extract commit message
+        id: extract-message
+        run: echo "commit_message=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
+
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          pr_title: "${{ env.commit_message }}"
+          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
+          pr_reviewer: "hezronkimutai"
